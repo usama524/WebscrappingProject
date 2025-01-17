@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expiry Date Fetcher</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Upload Your CSV File</h1>
+
+        <form id="upload-form" action="/upload" method="post" enctype="multipart/form-data">
+            <!-- Hidden input to store the current file type selection -->
+            <input type="hidden" id="is_drivers_input" name="is_drivers" value="false">
+
+            <div class="button-group">
+                <label for="is_drivers" class="button-label">Select your file type</label>
+                <div class="button-container">
+                    <button type="button" id="is_drivers_yes" class="toggle-btn"
+                        onclick="switchFileType(true)">Drivers</button>
+
+                    <button type="button" id="is_drivers_no" class="toggle-btn"
+                        onclick="switchFileType(false)">Vehicles</button>
+                </div>
+            </div>
+
+            <div class="file-input">
+                <input type="file" name="file" accept=".xlsx" id="file-input" required disabled>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submit-btn" disabled>Upload and Process</button>
+        </form>
+
+        <!-- Loading Overlay -->
+        <div id="loading-overlay">
+            <p id="loading-text">Please wait, processing in progress...</p>
+            <div id="spinner"></div>
+        </div>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        // Refresh the page and update the URL parameter
+        function switchFileType(isDriver) {
+            const baseUrl = window.location.origin + window.location.pathname;
+            const newUrl = isDriver ? `${baseUrl}?is_drivers=true` : `${baseUrl}?is_drivers=false`;
+            window.location.href = newUrl; // Redirect to the updated URL
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById('upload-form');
+            const isDrivers = new URLSearchParams(window.location.search).get('is_drivers') === 'true';
+
+            // Set the initial state based on URL parameter
+            if (isDrivers) {
+                document.getElementById('is_drivers_yes').classList.add('active');
+                document.getElementById('is_drivers_input').value = 'true';
+            } else {
+                document.getElementById('is_drivers_no').classList.add('active');
+                document.getElementById('is_drivers_input').value = 'false';
+            }
+
+            // Initialize file input and submit button
+            const fileInput = document.getElementById('file-input');
+            const submitBtn = document.getElementById('submit-btn');
+            fileInput.disabled = false;
+            submitBtn.disabled = false;
+
+            // Display selected file name
+            fileInput.addEventListener('change', function () {
+                const fileName = fileInput.files[0].name;
+                document.getElementById('file-name').textContent = `Selected file: ${fileName}`;
+            });
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                // Show loading overlay and spinner
+                document.getElementById('loading-overlay').style.display = 'flex';
+                document.getElementById('spinner').style.display = 'block';
+
+                const formData = new FormData(form);
+                const response = await fetch('/upload', { method: 'POST', body: formData });
+
+                const result = await response.json();
+                document.getElementById('loading-overlay').style.display = 'none';
+                document.getElementById('spinner').style.display = 'none'; // Hide spinner when done
+
+                if (response.ok) {
+                    document.getElementById('result').innerHTML =
+                        `<p class="success">File processed successfully! <br/><br/><a class="pulse-button" href="${result.download_url}" download>Download the updated file</a></p>`;
+                } else {
+                    document.getElementById('result').innerHTML = `<p class="error">Error: ${result.error}</p>`;
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

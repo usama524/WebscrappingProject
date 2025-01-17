@@ -1,0 +1,344 @@
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #b49121 , #8b6a00);
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    transition: background 2s ease; /* Smooth transition for background change */
+}
+
+.container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Styling for the Label */
+.button-label {
+    font-size: 20px;               /* Slightly larger for better visibility */
+    font-weight: bold;             /* Ensure bold text for emphasis */
+    color: #8b6a00;                /* Match the button's text color */
+    margin-bottom: 10px;           /* Add some space below the label */
+    text-align: center;            /* Center align for a more uniform look */
+    display: block;                /* Ensure label behaves as a block element */
+    text-transform: uppercase;     /* Make text uppercase for consistency */
+    letter-spacing: 1px;           /* Add spacing between letters for better readability */
+    font-family: 'Arial', sans-serif;  /* Same font family as the rest of the page */
+}
+
+/* Styling for the Header (h1) */
+h1 {
+    font-size: 36px;               /* Larger font size for header */
+    color: #333;                   /* Dark color for contrast */
+    margin-bottom: 20px;           /* Space below the header */
+    font-weight: 700;              /* Make header text bolder */
+    text-align: center;            /* Center the header for balance */
+    font-family: 'Arial', sans-serif; /* Same font as the rest of the page */
+    text-transform: uppercase;     /* Uppercase header text for uniformity */
+    letter-spacing: 2px;           /* Spacing between letters for a more professional look */
+}
+
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Radio Button Group */
+.radio-group {
+    text-align: left;
+    margin: 0 auto;
+    font-size: 16px;
+    color: #333;
+}
+
+input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.2);
+    accent-color: #8b6a00; /* Modern color for radio buttons */
+}
+
+input[type="radio"]:checked {
+    background-color: #8b6a00;
+}
+
+/* File Input Styling */
+input[type="file"] {
+    font-size: 16px;
+    padding: 12px 24px;  /* Match button padding */
+    border: 2px solid #000000;  /* Border similar to buttons */
+    border-radius: 6px;  /* Border radius like buttons */
+    cursor: pointer;
+    width: 100%;  /* Full width to match buttons */
+    min-width: 150px;  /* Ensure consistent width with buttons */
+    height: 50px;  /* Match button height */
+    box-sizing: border-box;  /* Include padding and border in the element's total width and height */
+    transition: background-color 0.3s ease;
+    color: #333;
+}
+
+input[type="file"]:hover {
+    background-color: #adadad;
+    color: #f1f1f1;
+}
+
+/* Submit Button Styling */
+.submit-btn {
+    background-color: #b49121;
+    color: white;
+    padding: 12px 24px; /* Consistent padding with toggle button */
+    font-size: 18px;
+    border: none;
+    border-radius: 6px; /* Same border-radius as toggle buttons */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    height: 50px;  /* Same height as toggle buttons */
+}
+
+.submit-btn:hover {
+    background-color: #8b6a00;
+    transform: translateY(-2px);
+}
+
+.submit-btn:active {
+    transform: translateY(2px);
+}
+
+/* Result Messages */
+.result {
+    margin-top: 30px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.success {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.error {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+a {
+    color: #8b6a00;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #b49121;
+}
+
+/* Loading Spinner Styles */
+#spinner {
+    display: none;
+    /* Initially hidden */
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 4px solid #f3f3f3;
+    /* Light gray background */
+    border-top: 4px solid #b49121;
+    /* Dark color for spinner effect */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 2s linear infinite;
+    z-index: 10000;
+    /* Ensure it's above other elements */
+}
+
+/* Spinner Animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#loading-overlay {
+    display: none;
+    /* Initially hidden */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    /* Ensure the overlay is above other elements */
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #b49121, #8b6a00);
+}
+
+#loading-text {
+    margin-bottom: 25px;
+}
+
+#spinner {
+    margin-top: 20px;
+}
+
+/* Style for the disabled state */
+button[disabled], input[disabled] {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}
+
+/* Button Container */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Ensures margin between buttons */
+    margin-top: 10px; /* Add some space between label and buttons */
+}
+
+
+/* Toggle Button Styling */
+.toggle-btn {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #000000; /* Default border color */
+    border-radius: 6px; /* Changed to match submit button */
+    color: #000000; /* Default text color */
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 12px 24px; /* Adjusted padding to match submit button */
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    width: 50%;
+    min-width: 150px;
+    height: 50px;  /* Ensure same height as submit button */
+}
+
+.toggle-btn:hover {
+    color: #fff;
+    background-color: #272727; /* Hover background color */
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+}
+
+.toggle-btn:active {
+    box-shadow: none;
+    transform: translateY(0);
+    background-color: #000000;
+}
+
+.toggle-btn.active {
+    background-color: #000000;
+    color: #fff;
+}
+
+/* File Input Styles */
+.file-input {
+    margin: 20px 0;
+}
+
+.file-type-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.file-type-btn.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#file-input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    padding: 12px 24px;  /* Same padding for consistency */
+    cursor: pointer;
+    height: 50px;  /* Same height for submit button */
+}
+.pulse-button {
+    padding: 20px 40px;
+    font-size: 24px;
+    color: #fff;
+    background: #000000;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    animation: pulse 1.5s infinite;
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Ensure the link behaves like a button */
+    margin-top: 10px;
+    text-align: center;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+    }
+
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+}
+
+.success {
+    font-size: 18px;
+    color: #4CAF50; /* Green color */
+    text-align: center;
+}
+
+.success a {
+    font-size: 24px;
+    color: #fff;
+    background: #b49121;
+    border-radius: 10px;
+    padding: 15px 30px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    animation: pulse 1.5s infinite;
+}
+
+.success a:hover {
+    background: #b49121; /* Darker shade on hover */
+}
